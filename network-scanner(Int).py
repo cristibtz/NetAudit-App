@@ -12,6 +12,7 @@ print()
 hosts = []
 queue = Queue()
 
+#Check using ARP every host
 def check_host():
     while not queue.empty():
 
@@ -43,6 +44,24 @@ def check_host():
               )
         queue.task_done()
 
+#Use threads to run check_host faster
+def run_threads(num_threads):
+    threads = []
+    try:
+        for _ in range(num_threads):
+            thread = threading.Thread(target = check_host)
+            thread.daemon = True
+            threads.append(thread)
+
+        for thread in threads:
+            thread.start()
+
+        for thread in threads:
+            thread.join(1)
+    except KeyboardInterrupt:
+        print("Exiting...")       
+
+#Display the results of the scan
 def display_hosts(hosts):
     no_of_hosts = len(hosts)
     if no_of_hosts == 0:
@@ -64,31 +83,18 @@ def display_hosts(hosts):
     print("-------------------------------------------------------")
     print()
 
+#Run script
 if __name__ == "__main__":
     network = sys.argv[1]
+    num_threads = 50
+
     ip_list = [str(ip) for ip in ipaddress.IPv4Network(network, strict=False)]
 
     for ip in ip_list:
         queue.put(ip)
 
-    num_threads = 50
-    threads = []
-    
-    try:
-        for _ in range(num_threads):
-            thread = threading.Thread(target = check_host)
-            thread.daemon = True
-            threads.append(thread)
-
-        for thread in threads:
-            thread.start()
-
-        for thread in threads:
-            thread.join(1)
-    except KeyboardInterrupt:
-        print("Exiting...")        
+    run_threads(num_threads)      
           
-    
     print()
     print("SCAN COMPLETE!")
     display_hosts(hosts)
