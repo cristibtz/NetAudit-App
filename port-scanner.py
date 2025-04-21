@@ -72,6 +72,8 @@ if __name__ == "__main__":
         threads_no = sys.argv[2]
         mode = sys.argv[3]
 
+        print("Starting scan on target: " + target)
+        print("-" * 64)
         ports = run_scanner(target, int(threads_no), int(mode))  
 
         if ports != []:
