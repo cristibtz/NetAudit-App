@@ -1,4 +1,4 @@
-1. Develop web-fuzzer.py
+1. Develop web-fuzzer.py !DONE!
 2. Use Django to build basic web interface
 4. Create MCP server to summarize hosts, ports and directory findings and create kind of logs files
 5. Implement functionality to send data to MCP server???kind of like a prompt??? or do it manually... To be decided...
