@@ -1,5 +1,12 @@
 from queue import Queue
 import socket, threading, sys
+import argparse
+
+parser = argparse.ArgumentParser(description="Web Fuzzer", formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+parser.add_argument("-u", "--host", required=True, help="IP address to scan")
+parser.add_argument("-t", "--threads", required=True, help="Number of threads to use")
+parser.add_argument("-m", "--mode", required=True, help="Mode of scan: 1 for well-known ports, 2 for all ports, 3 for popular service ports")
+
 
 queue = Queue()
 open_ports = []
@@ -68,9 +75,11 @@ def run_scanner(target, threads, mode):
 
 if __name__ == "__main__":
         
-        target = sys.argv[1]
-        threads_no = sys.argv[2]
-        mode = sys.argv[3]
+        args = parser.parse_args()
+        
+        target = args.host
+        threads_no = args.threads
+        mode = args.mode
 
         print("Starting scan on target: " + target)
         print("-" * 64)

@@ -1,6 +1,10 @@
 import scapy.all as scapy
 from queue import Queue
-import sys, socket, ipaddress, threading, time
+import sys, socket, ipaddress, threading, time, argparse
+
+
+parser = argparse.ArgumentParser(description="Web Fuzzer", formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+parser.add_argument("-n", "--network", required=True, help="Network --> example: 10.0.0.0/8 or 192.168.0.0/24, format: x.x.x.x/x")
 
 #Currently only scans internal network
 
@@ -85,7 +89,8 @@ def display_hosts(hosts):
 
 #Run script
 if __name__ == "__main__":
-    network = sys.argv[1]
+    args = parser.parse_args()
+    network = args.network
     num_threads = 50
 
     ip_list = [str(ip) for ip in ipaddress.IPv4Network(network, strict=False)]
