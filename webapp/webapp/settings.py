@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-lp7*nc#18n+3!9%(+29i_cgaebuxlus$n51!80**1fr#kb%2&t
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['192.168.100.179']
 
 
 # Application definition
@@ -110,6 +110,31 @@ USE_I18N = True
 
 USE_TZ = True
 
+TEMPLATES = [
+    {
+        # Template backend to be used, For example Jinja
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+      
+        ## Path definition of templates folder .
+        'DIRS': [BASE_DIR/'myapp/templates'],
+      
+        'APP_DIRS': True,
+        # options to configure
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
+    },
+]
+
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    BASE_DIR/'myapp/static',
+]
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/

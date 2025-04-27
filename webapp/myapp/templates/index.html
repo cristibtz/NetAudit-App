@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>NetAudit</title>
+    <script src="/static/network-scanner.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
+</head>
+<body class="container-fluid my-4">
+    <h1 class="text-center mb-4">Welcome to NetAudit!</h1>
+    <p class="text-center">Analyze your network and hosts.</p>
+
+    <div class="row g-4"> <!-- Added g-4 for some nice spacing -->
+        <!-- Network Scanner Card -->
+        <div class="col-md-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-body">
+                    <h4 class="card-title">Network Scanner</h4>
+                    <form action="/netscanner" method="post" id="network_scanner" class="mb-3">
+                        <div class="mb-3">
+                            <label for="network" class="form-label">IP Range:</label>
+                            <input type="text" id="network" name="network" class="form-control" placeholder="e.g., 192.168.1.0/24" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Scan</button>
+                    </form>
+                    <h5>Results:</h5>
+                    <div id="scan_results" class="p-3 mb-2 bg-dark text-white rounded" style="max-height: 300px; overflow-x: auto; overflow-y: auto; white-space: pre;">
+                        <!-- Results will be displayed here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Port Scanner Card -->
+        <div class="col-md-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-body">
+                    <h4 class="card-title">Port Scanner</h4>
+                    <p>Port scanning functionality will go here.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Directory Fuzzer Card -->
+        <div class="col-md-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-body">
+                    <h4 class="card-title">Directory Fuzzer</h4>
+                    <p>Directory fuzzing functionality</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
