@@ -1,25 +1,29 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const form = document.getElementById("network_scanner");
-    const resultsContainer = document.getElementById("scan_results");
+    const form = document.getElementById("port_scanner");
+    const resultsContainer = document.getElementById("port_results");
 
     form.addEventListener("submit", function (event) {
         event.preventDefault();
-
+        
         const formData = new FormData(form);
-        const network = formData.get("network");
+        const ip =  formData.get("ip");
+        const mode = formData.get("mode");
 
-        resultsContainer.textContent = "Scanning...";
+        resultsContainer.textContent = "Scanning ports...";
 
-        fetch("/netscanner", {
+        fetch("/portscanner", {
             method: "POST",
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded",
             },
-            body: new URLSearchParams({ network: network }),
+            body: new URLSearchParams({ 
+                ip: ip,
+                mode: mode              
+            })
         })
         .then((response) => {
             if (!response.ok) {
-                throw new Error("An error has occured: " + response.statusText);
+                throw new Error("An error has occurred: " + response.statusText);
             }
             return response.json();
         })
